@@ -54,4 +54,26 @@ export default class UserRepository {
       data,
     })
   }
+
+  // This query internally does a transaction like this:
+  /**
+   * BEGIN
+   * INSERT INTO "public"."User" ("email","name") VALUES ($1,$2) RETURNING "public"."User"."id"
+   * INSERT INTO "public"."Profile" ("bio","userId") VALUES ($1,$2) RETURNING "public"."Profile"."id"
+   * SELECT "public"."User"."id", "public"."User"."email", "public"."User"."name" FROM "public"."User" WHERE "public"."User"."id" = $1 LIMIT $2 OFFSET $3
+   * COMMIT
+   */
+  static async createUserWithBio(data: { email: string; name?: string; bio: string }) {
+    return await prisma.user.create({
+      data: {
+        email: data.email,
+        name: data.name,
+        profile: {
+          create: {
+            bio: data.bio,
+          },
+        },
+      },
+    })
+  }
 }

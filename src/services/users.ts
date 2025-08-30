@@ -4,6 +4,10 @@ export const createUser = async (email: string, name: string) => {
   await UserRepository.createUser({ email, name })
 }
 
+export const createUserWithBio = async (email: string, name: string, bio: string) => {
+  await UserRepository.createUserWithBio({ email, name, bio })
+}
+
 export const getUserById = async (id: number) => {
   return await UserRepository.findUserById(id)
 }
