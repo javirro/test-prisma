@@ -11,3 +11,11 @@ export const getUserById = async (id: number) => {
 export const getUserWithPostsById = async (id: number) => {
     return await UserRepository.findUserWithPostsById(id)
 }
+
+export const getUserWithProfileById = async (id: number) => {
+    return await UserRepository.findUserWithProfileById(id)
+}
+
+export const getUserWithBioById = async (id: number) => {
+    return await UserRepository.findUserWithBioById(id)
+}

@@ -28,6 +28,14 @@ export default class UserRepository {
       include: { profile: true },
     })
   }
+
+  static async findUserWithBioById(id: number) {
+    return await prisma.user.findUnique({
+      where: { id },
+      include: { profile: { select: { bio: true } } },
+    })
+  }
+
   static async createUser(data: { email: string; name?: string }) {
     return await prisma.user.create({
       data,
