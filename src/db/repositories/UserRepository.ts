@@ -4,6 +4,12 @@ export default class UserRepository {
   static async findAllUsers() {
     return await prisma.user.findMany()
   }
+
+  static async findAllUserAvailableIds() {
+    return await prisma.user.findMany({
+      select: { id: true },
+    })
+  }
   static async findUserById(id: number) {
     return await prisma.user.findUnique({
       where: { id },
@@ -33,6 +39,13 @@ export default class UserRepository {
     return await prisma.user.findUnique({
       where: { id },
       include: { profile: { select: { bio: true } } },
+    })
+  }
+
+  static async findUsersLikesById(id: number) {
+    return await prisma.user.findUnique({
+      where: { id },
+      include: { likes: true },
     })
   }
 
