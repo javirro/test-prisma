@@ -1,3 +1,4 @@
+import { User } from '../../generated/prisma'
 import UserRepository from '../db/repositories/UserRepository'
 
 export const createUser = async (email: string, name: string) => {
@@ -8,23 +9,23 @@ export const createUserWithBio = async (email: string, name: string, bio: string
   await UserRepository.createUserWithBio({ email, name, bio })
 }
 
-export const getUserById = async (id: number) => {
+export const getUserById = async (id: number): Promise<User | null> => {
   return await UserRepository.findUserById(id)
 }
 
-export const getUserWithPostsById = async (id: number) => {
+export const getUserWithPostsById = async (id: number): Promise<User | null> => {
   return await UserRepository.findUserWithPostsById(id)
 }
 
-export const getUserWithProfileById = async (id: number) => {
+export const getUserWithProfileById = async (id: number): Promise<User | null> => {
   return await UserRepository.findUserWithProfileById(id)
 }
 
-export const getUserWithBioById = async (id: number) => {
+export const getUserWithBioById = async (id: number): Promise<User | null> => {
   return await UserRepository.findUserWithBioById(id)
 }
 
-export const getUserWithLikesById = async (id: number) => {
+export const getUserWithLikesById = async (id: number): Promise<User | null> => {
   return await UserRepository.findUsersLikesById(id)
 }
 

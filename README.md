@@ -14,3 +14,8 @@ Each time we made some changes in the prisma schema, we must make a migration to
 npx prisma migrate dev --name migration-name
 ```
 This is a good practice for development environments. This will generate a migration.sql file where we will track each change we apply to the database. It helps a lot to send to production at the end of the project to know what changes must be applied in the real production database.
+
+
+## Typescript types
+
+Prisma generates automatically typescript type for each Model defined in prisma.schema. The type Name is the same that the model name.
